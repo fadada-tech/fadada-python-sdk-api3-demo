@@ -6,17 +6,8 @@ from fdd_sdk.exception.exceptions import ServerException
 
 fdd_client = FddClient('appId', 'appKey')
 token = '获取后的token'
+user_token = '获取到的userToken'
 
-def get_template_detail_by_id_demo():
-    try:
-        data = {
-            'templateId': '模板ID',
-        }
-        print(DocumentClient.get_template_detail_by_id(fdd_client, token, data))
-    except ClientException as e:
-        print(e.__str__())
-    except ServerException as e:
-        print(e.__str__())
 
 
 # 上传文件
@@ -26,10 +17,10 @@ def upload_file_demo():
            'fileType': '1',
            'fileContentHash': '',
        }
-       file = open('D:\\合同文件.pdf', 'rb')
-       file_hash = HashUtils.sha256_file_hex('D:\\合同文件.pdf')
+       file = open('C:\\山有木兮木有枝.pdf', 'rb')
+       file_hash = HashUtils.sha256_file_hex('C:\\山有木兮木有枝.pdf')
        data['fileContentHash'] = file_hash
-       print(DocumentClient.upload_file(fdd_client, token, file, data))
+       print(DocumentClient.upload_file(fdd_client, file, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
@@ -43,7 +34,7 @@ def get_by_sign_file_id_demo():
           'taskId': '签署任务ID',
           'signFileId': '',
       }
-      res = DocumentClient.get_by_sign_file_id(fdd_client, token, data)
+      res = DocumentClient.get_by_sign_file_id(fdd_client, data)
       print(res.text)
       with open("D:/签署文件.zip", "wb") as f:
           f.write(res.content)
@@ -60,7 +51,7 @@ def get_by_draft_id_demo():
            'draftId': '草稿ID',
            'draftFileId': '草稿文件ID',
        }
-       res = DocumentClient.get_by_draft_id(fdd_client, token, data)
+       res = DocumentClient.get_by_draft_id(fdd_client, data)
        with open("D:/草稿文件.zip", "wb") as f:
            f.write(res.content)
     except ClientException as e:
@@ -69,23 +60,6 @@ def get_by_draft_id_demo():
         print(e.__str__())
 
 
-# 填充模板
-def create_by_template_id_demo():
-    try:
-       data = {
-           'templateId': '模板Id',
-           'templateFiles': {
-               'templateFileId': '模板文件ID',
-               'formFields': {
-               },
-               'documentFileName': '测试请求'
-           }
-       }
-       print(DocumentClient.create_by_template_id(fdd_client, token, data))
-    except ClientException as e:
-        print(e.__str__())
-    except ServerException as e:
-        print(e.__str__())
 
 
 # 关键字查询坐标
@@ -99,7 +73,7 @@ def look_up_coordinates_demo():
                'keywordStrategy': ''
            }
        }
-       print(DocumentClient.look_up_coordinates(fdd_client, token, data))
+       print(DocumentClient.look_up_coordinates(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
@@ -117,7 +91,7 @@ def verify_signature_demo():
        file = open('D:\\合同文件.pdf', 'rb')
        file_hash = HashUtils.sha256_file_hex('D:\\合同文件.pdf')
        data['pdfInfo']['fileHash'] = file_hash
-       print(DocumentClient.verify_signature(fdd_client, token, file, data))
+       print(DocumentClient.verify_signature(fdd_client, file, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
@@ -132,7 +106,7 @@ def contract_report_download_demo():
                'taskId': ''
            }
        }
-       res = DocumentClient.contract_report_download(fdd_client, token, data)
+       res = DocumentClient.contract_report_download(fdd_client, data)
        with open("D:/合同技术报告.zip", "wb") as f:
            f.write(res.content)
     except ClientException as e:
@@ -146,12 +120,14 @@ def download_evidence_report_demo():
     try:
        data = {
            'queryInfo': {
-               'type': '',
+               'type': '2',
                'taskId': '',
-               'unionIds': []
+               'unionIds': ['ee4c523a61aa4e01b456962c038518d0']
            }
        }
-       res = DocumentClient.download_evidence_report(fdd_client, token, data)
+
+
+       res = DocumentClient.download_evidence_report(fdd_client, data)
        with open("D:/公证处报告.zip", "wb") as f:
            f.write(res.content)
     except ClientException as e:
@@ -160,12 +136,13 @@ def download_evidence_report_demo():
         print(e.__str__())
 
 
-# get_template_detail_by_id_demo()
-# upload_file_demo()
-# get_by_sign_file_id_demo()
-# get_by_draft_id_demo()
-# create_by_template_id_demo()
-# look_up_coordinates_demo()
-# verify_signature_demo()
+fdd_client.set_token(token)
+#  如果是第三方应用就设置userToken
+# fdd_client.set_user_token(user_token)
+upload_file_demo()
+get_by_sign_file_id_demo()
+get_by_draft_id_demo()
+look_up_coordinates_demo()
+verify_signature_demo()
 contract_report_download_demo()
 download_evidence_report_demo()

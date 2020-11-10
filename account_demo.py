@@ -7,22 +7,10 @@ from fdd_sdk.exception.exceptions import ServerException
 
 fdd_client = FddClient('appId', 'appKey')
 token = '获取后的token'
+user_token = '获取到的userToken'
 
 
-def get_authorize_url_demo():
-    try:
-        data = {
-            'redirectUrl': '回调通知地址',
-            'scope': '1',
-            'unionId': 'unionId值'
-        }
-        print(AccountClient.get_authorize_url(fdd_client, token, data))
-    except ClientException as e:
-        print(e.__str__())
-    except ServerException as e:
-        print(e.__str__())
-
-
+# 获取个人unionId地址
 def get_person_unionid_url_demo():
     try:
         data = {
@@ -48,25 +36,27 @@ def get_person_unionid_url_demo():
             'isMiniProgram': '是否需要小程序配置信息：0不需要，1需要，默认不需要',
         }
 
-        print(AccountClient.get_person_unionid_url(fdd_client, token, data))
+        print(AccountClient.get_person_unionid_url(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
         print(e.__str__())
 
 
+# 获取个人信息
 def get_person_info_demo():
     try:
         data = {
             'unionId': 'unionId值'
         }
-        print(AccountClient.get_person_info(fdd_client, token, data))
+        print(AccountClient.get_person_info(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
         print(e.__str__())
 
 
+# 获取企业unionId地址
 def get_company_unionid_url_demo():
     try:
         clientId = 'clientId' + datetime.now().strftime(Params.TIME_FORMAT)
@@ -101,25 +91,27 @@ def get_company_unionid_url_demo():
             'allowModify': '',
             'authScheme': '1'
         }
-        print(AccountClient.get_company_unionid_url(fdd_client, token, data))
+        print(AccountClient.get_company_unionid_url(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
         print(e.__str__())
 
 
+# 获取企业信息
 def get_company_info_demo():
     try:
         data = {
             'unionId': 'unionId值'
         }
-        print(AccountClient.get_company_info(fdd_client, token, data))
+        print(AccountClient.get_company_info(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
         print(e.__str__())
 
 
+# 校验账号
 def check_account_info_demo():
     try:
         data = {
@@ -127,15 +119,75 @@ def check_account_info_demo():
             'personName': '',
             'companyName': ''
         }
-        print(AccountClient.check_account_info(fdd_client, token, data))
+        print(AccountClient.check_account_info(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
         print(e.__str__())
 
-get_authorize_url_demo()
+
+# 获取接入方信息
+def get_access_object_info_demo():
+    try:
+        data = {}
+        print(AccountClient.get_access_object_info(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
+# 获取开通服务地址
+def get_open_server_url_demo():
+    try:
+        data = {
+            'thirdUserId': '第三方用户唯一标识',
+            'redirectUrl': '回调通知地址',
+            'unionId': 'unionId值'
+        }
+        print(AccountClient.get_open_server_url(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
+# 取消服务
+def cancel_server_demo():
+    try:
+        data = {
+            'thirdUserId': '第三方用户唯一标识',
+            'unionId': 'unionId值'
+        }
+        print(AccountClient.cancel_server(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
+# 获取userToken
+def get_user_token_demo():
+    try:
+        data = {
+            "grantCode": "开通服务授权码"
+        }
+        print(AccountClient.get_user_token(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
+fdd_client.set_token(token)
+#  如果是第三方应用就设置userToken
+# fdd_client.set_user_token(user_token)
 get_person_unionid_url_demo()
 get_person_info_demo()
 get_company_unionid_url_demo()
 get_company_info_demo()
+check_account_info_demo()
+get_access_object_info_demo()
+get_open_server_url_demo()
+get_user_token_demo()
 check_account_info_demo()

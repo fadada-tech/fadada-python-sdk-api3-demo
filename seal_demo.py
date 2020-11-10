@@ -5,6 +5,8 @@ from fdd_sdk.exception.exceptions import ServerException
 
 fdd_client = FddClient('appId', 'appKey')
 token = '获取后的token'
+user_token = '获取到的userToken'
+
 
 # 上传企业印章
 def add_company_seal_demo():
@@ -13,9 +15,12 @@ def add_company_seal_demo():
             'sealInfo': {
                 'imageHash': '',
                 'sealName': ''
+            },
+            'owner': {
+                'unionId': ''
             }
         }
-        print(SealClient.add_company_seal(fdd_client, token, data))
+        print(SealClient.add_company_seal(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
@@ -28,9 +33,12 @@ def del_company_seal_demo():
         data = {
             'sealInfo': {
                 'sealId': '印章ID'
+            },
+            'owner': {
+                'unionId': ''
             }
         }
-        print(SealClient.del_company_seal(fdd_client, token, data))
+        print(SealClient.del_company_seal(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
@@ -46,9 +54,12 @@ def seal_auth_demo():
             },
             'employeeInfo': {
                 'unionId': 'unionId值'
+            },
+            'owner': {
+                'unionId': ''
             }
         }
-        print(SealClient.seal_auth(fdd_client, token, data))
+        print(SealClient.seal_auth(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
@@ -64,9 +75,12 @@ def cancel_seal_auth_demo():
             },
             'employeeInfo': {
                 'unionId': 'unionId值'
+            },
+            'owner': {
+                'unionId': ''
             }
         }
-        print(SealClient.cancel_seal_auth(fdd_client, token, data))
+        print(SealClient.cancel_seal_auth(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
@@ -79,9 +93,12 @@ def company_seal_list_demo():
         data = {
             'sealInfo': {
                 'loadUnPass': '0'
+            },
+            'owner': {
+                'unionId': ''
             }
         }
-        print(SealClient.company_seal_list(fdd_client, token, data))
+        print(SealClient.company_seal_list(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
@@ -94,15 +111,21 @@ def company_seal_detail_demo():
         data = {
             'sealInfo': {
                 'sealId': '印章Id'
+            },
+            'owner': {
+                'unionId': ''
             }
         }
-        print(SealClient.company_seal_detail(fdd_client, token, data))
+        print(SealClient.company_seal_detail(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
         print(e.__str__())
 
 
+fdd_client.set_token(token)
+#  如果是第三方应用就设置userToken
+# fdd_client.set_user_token(user_token)
 add_company_seal_demo()
 del_company_seal_demo()
 seal_auth_demo()

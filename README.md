@@ -8,7 +8,6 @@ test 目录为测试用例
 
 #### 2.使用说明
 本SDK是在python3.7环境下开发的，如果其他版本使用遇到问题请联系相关人员
-demo 也是在python3.7环境下写的
 
 直接在SDK压面下载压缩包，或者使用git 拷贝github上SDK文件
 解压以后使用命令安装：
@@ -20,10 +19,13 @@ python setup.py install
 ```python
 pip install -r requirements.txt
 ```
-```
 
-安装完以后就可以使用了，下面是配置以及获取token的demo：
+下面是配置以及获取token的demo：
 token的有效期是2个小时，不一定每一次请求都要获取token。
+调用set_token方法设置token
+
+如果是第三方应用 请求接口时候加入userToken
+调用set_user_token方法设置user_token
 
 ```python
 from fdd_sdk.client.client import FddClient
@@ -38,9 +40,11 @@ fdd_client = FddClient('appId', 'appKey', request_url='请求url', log=True)
 
 #设置超时时间 默认不设置 单位秒
 fdd_client = FddClient('appId', 'appKey', request_url='请求url', log=True, timeout=2)
+
+
 #获取token
 try:
-    result = Oauth2Client.get_token(fdd_client)
+    result = Oauth2Client.get_token_demo(fdd_client)
     print('token = %s' % result['data']['accessToken'])
 except ClientException as  e:
 #客户端初始化异常
