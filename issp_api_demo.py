@@ -140,6 +140,7 @@ def get_access_object_info_demo():
 def get_open_server_url_demo():
     try:
         data = {
+            'thirdUserId': '第三方用户唯一标识',
             'redirectUrl': '回调通知地址',
             'unionId': 'unionId值'
         }
@@ -154,6 +155,7 @@ def get_open_server_url_demo():
 def cancel_server_demo():
     try:
         data = {
+            'thirdUserId': '第三方用户唯一标识',
             'unionId': 'unionId值'
         }
         print(AccountClient.cancel_server(fdd_client, data))
@@ -176,19 +178,6 @@ def get_user_token_demo():
         print(e.__str__())
 
 
-# 根据uuid获取文件base64值
-def get_file_base64_demo():
-    try:
-        data = {
-            "uuid": "文件uuid"
-        }
-        print(AccountClient.get_file_base64(fdd_client, data))
-    except ClientException as e:
-        print(e.__str__())
-    except ServerException as e:
-        print(e.__str__())
-
-
 if __name__ == '__main__':
     fdd_client.set_token(token)
     #  如果是第三方应用就设置userToken
@@ -202,4 +191,3 @@ if __name__ == '__main__':
     get_open_server_url_demo()
     get_user_token_demo()
     check_account_info_demo()
-    get_file_base64_demo()

@@ -1,17 +1,17 @@
-from fdd_sdk.client.client import FddClient
 from fdd_sdk.client.sign_task import SignTaskClient
 from fdd_sdk.exception.exceptions import ClientException
 from fdd_sdk.exception.exceptions import ServerException
 
-fdd_client = FddClient('appId', 'appKey')
-token = '获取后的token'
-user_token = '获取到的userToken'
+from base_demo import fdd_client
+from base_demo import token
+from base_demo import user_token
+
 
 # 利用文件库id创建签署任务
 def signtasks_create_by_file_demo():
     try:
         data = {
-            'taskSubject': 'python-sdk测试',
+            'taskSubject': '签署任务编号',
             'status': 'sent',
             'sort': '1',
             'sender': {
@@ -39,9 +39,9 @@ def signtasks_create_by_file_demo():
                 'signIntendWay': '',
                 'authorizedUnionId': '',
                 'externalSigner': {
-                    'mobile': '',
-                    'personName': '',
-                    'companyName': '',
+                    'mobile': '外部签署人手机号码',
+                    'personName': '外部签署人姓名',
+                    'companyName': '外部签署人组织名称',
                 },
                 'signOrder': '203',
                 'notice': {
@@ -49,7 +49,7 @@ def signtasks_create_by_file_demo():
                     'notifyAddress': '手机号码',
                 },
                 'fileSigns': [{
-                    'fileId': '1597894422606157715',
+                    'fileId': '文件编号',
                     'signHeres': [{
                         'pageNumber': '0',
                         'xCoordinate': '200',
@@ -71,15 +71,15 @@ def signtasks_create_by_file_demo():
 def signtasks_create_by_draft_id_demo():
     try:
         data = {
-            'taskSubject': 'python-sdk',
-            'draftId': '1588853378076160059',
+            'taskSubject': '签署任务主题',
+            'draftId': '草稿文件编号',
             'status': 'sent',
             'sort': '1',
             'sender': {
                 'signWay': '1',
                 'signIntendWay': '1',
                 'signOrder': '1',
-                'templateRoleName': 'df',
+                'templateRoleName': '角色名称',
                 'notice': {
                     'notifyWay': '1',
                     'notifyAddress': '手机号码'
@@ -90,7 +90,7 @@ def signtasks_create_by_draft_id_demo():
                 'signIntendWay': '1',
                 'authorizedUnionId': '',
                 'signOrder': '1',
-                'templateRoleName': '1',
+                'templateRoleName': '角色名称',
                 'externalSigner': {
                     'mobile': '手机号码',
                     'personName': '',
@@ -116,7 +116,7 @@ def signtasks_create_by_draft_id_demo():
 def get_sign_url_demo():
     try:
         data = {
-            'taskId': '任务ID',
+            'taskId': '签署任务编号',
             'unionId': 'unionId值',
             'redirectUrl': '回调通知地址',
             'miniProgramSign': '1'
@@ -132,7 +132,7 @@ def get_sign_url_demo():
 def get_task_detail_by_task_id_demo():
     try:
         data = {
-            'taskId': '任务ID',
+            'taskId': '签署任务编号',
             'unionId': 'unionId值'
         }
         print(SignTaskClient.get_task_detail_by_task_id(fdd_client, data))
@@ -146,8 +146,8 @@ def get_task_detail_by_task_id_demo():
 def cancel_demo():
     try:
         data = {
-            'taskId': '任务ID',
-            'remark': 'df'
+            'taskId': '签署任务编号',
+            'remark': '撤销原因'
         }
         print(SignTaskClient.cancel(fdd_client, data))
     except ClientException as e:
@@ -200,51 +200,51 @@ def get_sign_preview_url_demo():
 def create_task_by_file_demo():
     try:
         data = {
-            'taskSubject': 'df',
+            'taskSubject': '签署任务主题',
             'status': 'sent',
             'sort': '1',
             'sender': {
-                'unionId': 'df'
+                'unionId': '发送人unionId值'
             },
             'files': [
                 {
-                    'fileId': '1212'
+                    'fileId': '文件编号'
                 }
             ],
             'attachments': [
                 {
-                    'fileId': ''
+                    'fileId': '附件编号'
                 }
             ],
             'signers': [
                 {
                     'signer': {
                         'signatory': {
-                            'signerId': '',
+                            'signerId': '签署人unionId值',
                             'seal': {
-                                'sealId': 'df'
+                                'sealId': '印章编号'
                             }
                         },
                         'corp': {
-                            'corpId': 'df',
+                            'corpId': '组织unionId',
                             'seal': {
-                                'sealId': 'df'
+                                'sealId': '印章编号'
                             }
                         },
                         'signAction': {
-                            'signWay': 'df',
-                            'signIntendWay': 'df'
+                            'signWay': 1,
+                            'signIntendWay': 1
                         }
                     },
                     'notice': {
                         'notifyWay': 1,
-                        'notifyAddres': ''
+                        'notifyAddres': '通知手机号码'
                     }
                 }
             ],
             'externalSigner': {
-                'mobile': 'df',
-                'personName': 'df',
+                'mobile': '外部签署人手机号码',
+                'personName': '外部签署人姓名',
                 'externalCorp': {
                     'corpName': ''
                 }
@@ -252,7 +252,7 @@ def create_task_by_file_demo():
             'signOrder': '1',
             'signRegions': [
                 {
-                    'fileId': '45465454545',
+                    'fileId': '文件编号',
                     'signHeres': [
                         {
                             'pageNumber': '0',
@@ -264,10 +264,10 @@ def create_task_by_file_demo():
             ],
             'ccs': [
                 {
-                    'unionId': '845454d',
+                    'unionId': 'unionId值',
                     'notice': {
                         'notifyWay': '1',
-                        'notifyAddress': '1'
+                        'notifyAddress': '手机号码'
                     }
                 }
             ],
@@ -289,14 +289,14 @@ def batch_create_by_draft_id_demo():
                 'unionId': '1'
             },
             'signtasks': [{
-                'taskSubject': 'python-sdk',
-                'draftId': '1588853378076160059',
+                'taskSubject': '签署任务主题',
+                'draftId': '草稿编号',
                 'sort': '1',
                 'sender': {
                     'signWay': '1',
                     'signIntendWay': '1',
                     'signOrder': '1',
-                    'templateRoleName': 'df',
+                    'templateRoleName': '角色名称',
                     'sealId': ''
                 },
                 'signers': {
@@ -331,14 +331,14 @@ def batch_add_by_draft_id_demo():
         data = {
             'batchNo': '批次号',
             'signtasks': [{
-                'taskSubject': 'python-sdk',
-                'draftId': '1588853378076160059',
+                'taskSubject': '签署任务主题',
+                'draftId': '草稿编号',
                 'sort': '1',
                 'sender': {
                     'signWay': '1',
                     'signIntendWay': '1',
                     'signOrder': '1',
-                    'templateRoleName': 'df',
+                    'templateRoleName': '角色名称',
                     'sealId': ''
                 },
                 'signers': {
@@ -406,21 +406,84 @@ def batch_sent_demo():
         print(e.__str__())
 
 
-fdd_client.set_token(token)
-#  如果是第三方应用就设置userToken
-# fdd_client.set_user_token(user_token)
-signtasks_create_by_file_demo()
-signtasks_create_by_draft_id_demo()
-get_sign_url_demo()
-get_task_detail_by_task_id_demo()
-cancel_demo()
-get_sent_url_demo()
-urge_sign_demo()
-get_sign_preview_url_demo()
-create_task_by_file_demo()
+# 根据批次号发起
+def create_task_by_draft_id_demo():
+    try:
+        data = {
+            'draftId': '草稿编号',
+            'taskSubject': '签署任务主题',
+            'status': 'sent',
+            'sort': '1',
+            'sender': {
+                'unionId': 'unionId值'
+            },
+            'signers': [{
+                'templateRoleName': '签署角色名称',
+                'signer': {
+                    'signatory': {
+                        'signerId': '签署人的unionId值',
+                        'seal': {
+                            'sealId': '印章编号'
+                        }
+                    },
+                    'corp': {
+                        'corpId': '组织unionId值',
+                        'seal': {
+                            'sealId': '印章编号'
+                        }
+                    },
+                    'signAction': {
+                        'signWay': 1,
+                        'signIntendWay': 1
+                    },
+                    'notice': {
+                        'notifyWay': 1,
+                        'notifyAddress': '手机号码'
+                    }
+                },
+                'externalSigner': {
+                    'mobile': '外部签署人手机号码',
+                    'personName': '外部签署人姓名',
+                    'externalCorp': {
+                        'corpName': '外部组织的名称'
+                    }
+                },
+                'signOrder': 15
+            }],
+            'ccs': [{
+                'unionId': '抄送人unionId值',
+                'notice': {
+                    'notifyWay': 1,
+                    'notifyAddress': '通知手机号码'
+                }
+            }],
+            'autoArchive': 1
+        }
+        print(SignTaskClient.create_task_by_draft_id(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
 
-batch_create_by_draft_id_demo()
-batch_add_by_draft_id_demo()
-batch_get_sign_url_demo()
-batch_sent_demo()
-batch_get_signtasks_by_batch_no_demo()
+
+if __name__ == '__main__':
+    fdd_client.set_token(token)
+    #  如果是第三方应用就设置userToken
+    # fdd_client.set_user_token(user_token)
+    signtasks_create_by_file_demo()
+    signtasks_create_by_draft_id_demo()
+    get_sign_url_demo()
+    get_task_detail_by_task_id_demo()
+    cancel_demo()
+    get_sent_url_demo()
+    urge_sign_demo()
+    get_sign_preview_url_demo()
+    create_task_by_file_demo()
+    signtasks_create_by_draft_id_demo()
+    create_task_by_draft_id_demo()
+
+    batch_create_by_draft_id_demo()
+    batch_add_by_draft_id_demo()
+    batch_get_sign_url_demo()
+    batch_sent_demo()
+    batch_get_signtasks_by_batch_no_demo()

@@ -1,19 +1,19 @@
-from fdd_sdk.client.client import FddClient
 from fdd_sdk.client.oauth2 import Oauth2Client
 from fdd_sdk.exception.exceptions import ClientException
 from fdd_sdk.exception.exceptions import ServerException
 
-fdd_client = FddClient('appId', 'appKey')
-token = '获取后的token'
-user_token = '获取到的userToken'
+from base_demo import fdd_client
+from base_demo import token
+from base_demo import user_token
+
 
 # 获取token
 def get_token_demo():
     try:
         result = Oauth2Client.get_token(fdd_client)
         token = result['data']['accessToken']
-        fdd_client.set_token(token)
         print('token = %s' % token)
+        return token
     except ClientException as  e:
         print(e)
     except ServerException as e:
@@ -62,9 +62,11 @@ def cancel_auth_sign_auth_demo():
         print(e.__str__())
 
 
-get_token_demo()
-#  如果是第三方应用就设置userToken
-# fdd_client.set_user_token(user_token)
-get_authorize_url_demo()
-get_auto_sign_auth_url_demo()
-cancel_auth_sign_auth_demo()
+if __name__ == '__main__':
+    get_token_demo()
+    fdd_client.set_token(token)
+    # 如果是第三方应用就设置userToken
+    # fdd_client.set_user_token(user_token)
+    get_authorize_url_demo()
+    get_auto_sign_auth_url_demo()
+    cancel_auth_sign_auth_demo()

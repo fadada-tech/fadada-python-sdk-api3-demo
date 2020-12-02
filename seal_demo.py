@@ -1,11 +1,10 @@
-from fdd_sdk.client.client import FddClient
 from fdd_sdk.client.seal import SealClient
 from fdd_sdk.exception.exceptions import ClientException
 from fdd_sdk.exception.exceptions import ServerException
 
-fdd_client = FddClient('appId', 'appKey')
-token = '获取后的token'
-user_token = '获取到的userToken'
+from base_demo import fdd_client
+from base_demo import token
+from base_demo import user_token
 
 
 # 上传企业印章
@@ -14,7 +13,7 @@ def add_company_seal_demo():
         data = {
             'sealInfo': {
                 'imageHash': '',
-                'sealName': ''
+                'sealName': '印章名称'
             },
             'owner': {
                 'unionId': ''
@@ -32,7 +31,7 @@ def del_company_seal_demo():
     try:
         data = {
             'sealInfo': {
-                'sealId': '印章ID'
+                'sealId': '印章编号'
             },
             'owner': {
                 'unionId': ''
@@ -50,7 +49,7 @@ def seal_auth_demo():
     try:
         data = {
             'sealInfo': {
-                'sealId': '印章ID'
+                'sealId': '印章编号'
             },
             'employeeInfo': {
                 'unionId': 'unionId值'
@@ -71,7 +70,7 @@ def cancel_seal_auth_demo():
     try:
         data = {
             'sealInfo': {
-                'sealId': '印章ID'
+                'sealId': '印章编号'
             },
             'employeeInfo': {
                 'unionId': 'unionId值'
@@ -110,7 +109,7 @@ def company_seal_detail_demo():
     try:
         data = {
             'sealInfo': {
-                'sealId': '印章Id'
+                'sealId': '印章编号'
             },
             'owner': {
                 'unionId': ''
@@ -123,12 +122,13 @@ def company_seal_detail_demo():
         print(e.__str__())
 
 
-fdd_client.set_token(token)
-#  如果是第三方应用就设置userToken
-# fdd_client.set_user_token(user_token)
-add_company_seal_demo()
-del_company_seal_demo()
-seal_auth_demo()
-cancel_seal_auth_demo()
-company_seal_list_demo()
-company_seal_detail_demo()
+if __name__ == '__main__':
+    fdd_client.set_token(token)
+    #  如果是第三方应用就设置userToken
+    # fdd_client.set_user_token(user_token)
+    add_company_seal_demo()
+    del_company_seal_demo()
+    seal_auth_demo()
+    cancel_seal_auth_demo()
+    company_seal_list_demo()
+    company_seal_detail_demo()
