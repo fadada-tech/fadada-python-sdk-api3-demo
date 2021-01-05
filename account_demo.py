@@ -189,6 +189,19 @@ def get_file_base64_demo():
         print(e.__str__())
 
 
+# 根据clientId获取UnionId
+def get_union_ids_demo():
+    try:
+        data = {
+            "clientId": "clientId值"
+        }
+        print(AccountClient.get_file_base64(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
 if __name__ == '__main__':
     fdd_client.set_token(token)
     #  如果是第三方应用就设置userToken
@@ -203,3 +216,4 @@ if __name__ == '__main__':
     get_user_token_demo()
     check_account_info_demo()
     get_file_base64_demo()
+    get_union_ids_demo()

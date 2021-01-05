@@ -187,7 +187,7 @@ def get_template_main_url_demo():
     try:
         data = {
             'templateInfo': {
-                'templateId':'模板编号'
+                'templateId': '模板编号'
             }
         }
         print(TemplateClient.get_template_main_url(fdd_client, data))
@@ -210,6 +210,25 @@ def get_template_detail_demo():
         print(e.__str__())
 
 
+# 新增自定义控件
+def add_widget_demo():
+    try:
+        data = {
+            'widgetType': '1',
+            'widgetName': '控件名称',
+            'widgetValue': '控件默认值',
+            'fontType': '1',
+            'fontSize': '23',
+            'isRequired': '2',
+            'align': '1'
+        }
+        print(TemplateClient.add_widget(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
 if __name__ == '__main__':
     fdd_client.set_token(token)
     #  如果是第三方应用就设置userToken
@@ -226,3 +245,4 @@ if __name__ == '__main__':
     template_init_demo()
     get_template_main_url_demo()
     get_template_detail_demo()
+    add_widget_demo()
