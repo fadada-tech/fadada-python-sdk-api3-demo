@@ -121,10 +121,24 @@ def download_evidence_report_demo():
                 'unionIds': ['unionId值']
             }
         }
-
         res = DocumentClient.download_evidence_report(fdd_client, data)
         with open("D:/公证处报告.zip", "wb") as f:
             f.write(res.content)
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
+# 根据链接上传文件
+def upload_file_by_url_demo():
+    try:
+        data = {
+            'fileName': '文件名称',
+            'fileType': '1',
+            'fileUrl': '文件下载链接'
+        }
+        print(DocumentClient.upload_file_by_url(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
@@ -142,3 +156,4 @@ if __name__ == '__main__':
     verify_signature_demo()
     contract_report_download_demo()
     download_evidence_report_demo()
+    upload_file_by_url_demo()
