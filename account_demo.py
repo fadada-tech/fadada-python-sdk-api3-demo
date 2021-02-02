@@ -167,7 +167,7 @@ def cancel_server_demo():
 def get_user_token_demo():
     try:
         data = {
-            "grantCode": "开通服务授权码"
+            'grantCode': '开通服务授权码'
         }
         print(AccountClient.get_user_token(fdd_client, data))
     except ClientException as e:
@@ -180,7 +180,7 @@ def get_user_token_demo():
 def get_file_base64_demo():
     try:
         data = {
-            "uuid": "文件uuid"
+            'uuid': '文件uuid'
         }
         print(AccountClient.get_file_base64(fdd_client, data))
     except ClientException as e:
@@ -193,9 +193,30 @@ def get_file_base64_demo():
 def get_union_ids_demo():
     try:
         data = {
-            "clientId": "clientId值"
+            'clientId': 'clientId值'
         }
         print(AccountClient.get_file_base64(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
+# 生态租户下单
+def purchase_demo():
+    try:
+        fdd_client.set_user_token(user_token)
+        data = {
+            'tenantUnionId': '租户unionId',
+            'tenantName': '租户名称',
+            'orderType': '1',
+            'paymentType': '2',
+            'orderWay': '2',
+            'productSku': '123,23',
+            'number': '1',
+            'oldOrderNumber': '续费时，需传入旧订单编号',
+        }
+        print(AccountClient.purchase(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
@@ -217,3 +238,4 @@ if __name__ == '__main__':
     check_account_info_demo()
     get_file_base64_demo()
     get_union_ids_demo()
+    purchase_demo()

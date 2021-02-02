@@ -169,7 +169,7 @@ def cancel_server_demo():
 def get_user_token_demo():
     try:
         data = {
-            "grantCode": "开通服务授权码"
+            'grantCode': '开通服务授权码'
         }
         print(AccountClient.get_user_token(fdd_client, data))
     except ClientException as e:

@@ -119,7 +119,7 @@ def download_company_template_file_demo():
 
         }
         res = TemplateClient.download_company_template_file(fdd_client, data)
-        with open("D:/模板文件.zip", "wb") as f:
+        with open('D:/模板文件.zip', 'wb') as f:
             f.write(res.content)
     except ClientException as e:
         print(e.__str__())

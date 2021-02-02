@@ -466,6 +466,22 @@ def create_task_by_draft_id_demo():
         print(e.__str__())
 
 
+# 获取快捷签署链接
+def get_quick_sign_url_demo():
+    try:
+        data = {
+            'taskId': '定稿编号',
+            'mobile': '外部签署手机号码',
+            'redirectUrl': '签署完成重定向地址',
+            'miniProgram': '1',
+        }
+        print(SignTaskClient.get_quick_sign_url(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
 if __name__ == '__main__':
     fdd_client.set_token(token)
     #  如果是第三方应用就设置userToken
@@ -481,6 +497,7 @@ if __name__ == '__main__':
     create_task_by_file_demo()
     signtasks_create_by_draft_id_demo()
     create_task_by_draft_id_demo()
+    get_quick_sign_url_demo()
 
     batch_create_by_draft_id_demo()
     batch_add_by_draft_id_demo()

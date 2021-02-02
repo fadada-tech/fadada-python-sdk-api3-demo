@@ -34,7 +34,7 @@ def get_by_sign_file_id_demo():
         }
         res = DocumentClient.get_by_sign_file_id(fdd_client, data)
         print(res.text)
-        with open("D:/签署文件.zip", "wb") as f:
+        with open('D:/签署文件.zip', 'wb') as f:
             f.write(res.content)
     except ClientException as e:
         print(e.__str__())
@@ -50,7 +50,7 @@ def get_by_draft_id_demo():
             'draftFileId': '草稿文件ID',
         }
         res = DocumentClient.get_by_draft_id(fdd_client, data)
-        with open("D:/草稿文件.zip", "wb") as f:
+        with open('D:/草稿文件.zip', 'wb') as f:
             f.write(res.content)
     except ClientException as e:
         print(e.__str__())
@@ -103,7 +103,7 @@ def contract_report_download_demo():
             }
         }
         res = DocumentClient.contract_report_download(fdd_client, data)
-        with open("D:/合同技术报告.zip", "wb") as f:
+        with open('D:/合同技术报告.zip', 'wb') as f:
             f.write(res.content)
     except ClientException as e:
         print(e.__str__())
@@ -122,7 +122,7 @@ def download_evidence_report_demo():
             }
         }
         res = DocumentClient.download_evidence_report(fdd_client, data)
-        with open("D:/公证处报告.zip", "wb") as f:
+        with open('D:/公证处报告.zip', 'wb') as f:
             f.write(res.content)
     except ClientException as e:
         print(e.__str__())
