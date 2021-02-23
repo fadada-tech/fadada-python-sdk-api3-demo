@@ -8,7 +8,7 @@ test 目录为测试用例
 
 #### 2.使用说明
 本SDK是在python3.7环境下开发的，如果其他版本使用遇到问题请联系相关人员
-解压fdd_sdk-1.1.0.zip后
+解压fdd_sdk zip的压缩包
 后使用命令安装：
 ```python
 python setup.py install
