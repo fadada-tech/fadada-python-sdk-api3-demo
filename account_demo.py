@@ -205,6 +205,7 @@ def get_union_ids_demo():
 # 生态租户下单
 def purchase_demo():
     try:
+        # 生态设置userToken
         fdd_client.set_user_token(user_token)
         data = {
             'tenantUnionId': '租户unionId',
@@ -217,6 +218,56 @@ def purchase_demo():
             'oldOrderNumber': '续费时，需传入旧订单编号',
         }
         print(AccountClient.purchase(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
+# 获取个人企业unionId地址
+def get_person_and_company_union_id_url_demo():
+    try:
+        data = {
+            'clientId': '账号关联id',
+            'company': {
+                'companyAuthScheme': '1',
+                'companyName': '机构名称',
+                'organizationType': '0',
+                'creditNo': '机构代码',
+                'legalName': '机构法人姓名',
+                'creditImageBase64': '机构证件照片Base64',
+                'authorizationFileBase64': '机构申请表Base64',
+                'applicantType': 1,
+                'bank': {
+                    'bankName': '银行名称',
+                    'bandBranchName': '支行名称',
+                    'bankCardNo': '银行卡号',
+                    'bankProvinceName': '银行所在省份',
+                    'bankCityName': '银行所在市'
+                }
+            },
+            'applicant': {
+                'authScheme': '1',
+                'name': '姓名',
+                'identType': '0',
+                'identNo': '证件号码',
+                'mobile': '手机号',
+                'idPhotoOptional': '0',
+                'idCardImgBase64': '身份证正面照base64',
+                'backIdCardImgBase64': '身份证背面照base64',
+                'bankCardNo': '银行卡号'
+            },
+            'allowModify': '0',
+            'authScope': '1',
+            'notice': {
+                'notifyWay': 1,
+                'notifyAddress': '通知手机号码'
+            },
+            'redirectUrl': '重定向地址',
+            'reRealName': 0,
+            'isMiniProgram': 0
+        }
+        print(AccountClient.get_person_and_company_union_id_url(fdd_client, data))
     except ClientException as e:
         print(e.__str__())
     except ServerException as e:
@@ -239,3 +290,4 @@ if __name__ == '__main__':
     get_file_base64_demo()
     get_union_ids_demo()
     purchase_demo()
+    get_person_and_company_union_id_url_demo()
