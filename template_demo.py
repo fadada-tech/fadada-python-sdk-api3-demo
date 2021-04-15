@@ -187,7 +187,7 @@ def get_template_main_url_demo():
     try:
         data = {
             'templateInfo': {
-                'templateId': '模板编号'
+                'templateId': '1616664780304172310'
             }
         }
         print(TemplateClient.get_template_main_url(fdd_client, data))
@@ -233,16 +233,16 @@ if __name__ == '__main__':
     fdd_client.set_token(token)
     #  如果是第三方应用就设置userToken
     # fdd_client.set_user_token(user_token)
-    upload_company_template_file_demo()
-    update_company_template_demo()
-    get_edit_company_template_url_demo()
-    del_company_template_file_demo()
-    get_company_template_preview_url_demo()
-    query_company_template_list_demo()
-    download_company_template_file_demo()
-    get_template_detail_by_id_demo()
-    create_by_template_id_demo()
-    template_init_demo()
+    # upload_company_template_file_demo()
+    # update_company_template_demo()
+    # get_edit_company_template_url_demo()
+    # del_company_template_file_demo()
+    # get_company_template_preview_url_demo()
+    # query_company_template_list_demo()
+    # download_company_template_file_demo()
+    # get_template_detail_by_id_demo()
+    # create_by_template_id_demo()
+    # template_init_demo()
     get_template_main_url_demo()
-    get_template_detail_demo()
-    add_widget_demo()
+    # get_template_detail_demo()
+    # add_widget_demo()

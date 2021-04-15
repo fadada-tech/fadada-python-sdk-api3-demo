@@ -482,6 +482,22 @@ def get_quick_sign_url_demo():
         print(e.__str__())
 
 
+# 下载签署任务
+def download_sign_task_demo():
+    try:
+        data = {
+            'taskId': '签署任务编号',
+            'downloadWay': '1'
+        }
+        res = SignTaskClient.download_sign_task(fdd_client, data)
+        with open('D:/签署任务.zip', 'wb') as f:
+            f.write(res.content)
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
 if __name__ == '__main__':
     fdd_client.set_token(token)
     #  如果是第三方应用就设置userToken
@@ -498,6 +514,7 @@ if __name__ == '__main__':
     signtasks_create_by_draft_id_demo()
     create_task_by_draft_id_demo()
     get_quick_sign_url_demo()
+    download_sign_task_demo()
 
     batch_create_by_draft_id_demo()
     batch_add_by_draft_id_demo()

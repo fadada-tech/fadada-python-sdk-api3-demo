@@ -115,6 +115,22 @@ def save_fill_values_demo():
         print(e.__str__())
 
 
+# 下载定稿任务
+def download_revise_task_demo():
+    try:
+        data = {
+            'taskId': '定稿任务编号',
+            'downloadWay': '1'
+        }
+        res = ReviseTaskClient.download_revise_task(fdd_client, data)
+        with open('D:/定稿任务.zip', 'wb') as f:
+            f.write(res.content)
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
 if __name__ == '__main__':
     fdd_client.set_token(token)
     #  如果是第三方应用就设置userToken
@@ -124,3 +140,4 @@ if __name__ == '__main__':
     get_fill_file_url_demo()
     revise_task_detail_demo()
     save_fill_values_demo()
+    download_revise_task_demo()
