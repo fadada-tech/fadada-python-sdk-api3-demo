@@ -498,6 +498,48 @@ def download_sign_task_demo():
         print(e.__str__())
 
 
+# 获取批量签署链接
+def get_batch_sign_url_demo():
+    try:
+        data = {
+            'requestWay': '1',
+            'redirectUrl': '重定向地址',
+            'signerId': '签署人的unionId',
+            'corpId': '组织的unionId',
+            'signtasks': [
+                {
+                    'taskId': '签署任务id'
+                }
+            ]
+        }
+        print(SignTaskClient.get_batch_sign_url(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
+# 签署任务变更签署节点
+def change_signer_demo():
+    try:
+        data = {
+            'taskId': '1',
+            'externalSigner': {
+                'mobile': '签署任务中外部签署人的手机号'
+            },
+            'changeSigner': {
+                'mobile': '需要变更的手机号',
+                'personName': '个人名称',
+                'idCardNo': '身份证号码'
+            }
+        }
+        print(SignTaskClient.change_signer(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
 if __name__ == '__main__':
     fdd_client.set_token(token)
     #  如果是第三方应用就设置userToken
@@ -515,6 +557,8 @@ if __name__ == '__main__':
     create_task_by_draft_id_demo()
     get_quick_sign_url_demo()
     download_sign_task_demo()
+    change_signer_demo()
+    get_batch_sign_url_demo()
 
     batch_create_by_draft_id_demo()
     batch_add_by_draft_id_demo()

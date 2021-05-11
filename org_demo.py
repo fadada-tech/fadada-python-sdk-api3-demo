@@ -108,6 +108,27 @@ def del_employee_demo():
         print(e.__str__())
 
 
+# 批量同步员工数据
+def batch_sync_employee_demo():
+    try:
+        data = {
+            'unionId': '公司unionId值',
+            'employeeInfos': [
+                {
+                    'employeeName': '员工姓名',
+                    'mobile': '员工手机号',
+                    'email': '员工email',
+                    'action': 1
+                }
+            ]
+        }
+        print(OrgClient.batch_sync_employee(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
 if __name__ == '__main__':
     fdd_client.set_token(token)
     #  如果是第三方应用就设置userToken
@@ -120,3 +141,4 @@ if __name__ == '__main__':
     get_add_sub_company_url_demo()
     remove_sub_company_demo()
     del_employee_demo()
+    batch_sync_employee_demo()

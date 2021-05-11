@@ -274,6 +274,20 @@ def get_person_and_company_union_id_url_demo():
         print(e.__str__())
 
 
+# 获取更换用户手机号地址
+def get_modify_mobile_url_demo():
+    try:
+        data = {
+            'unionId': 'unionId值',
+            'redirectUrl': '重定向地址'
+        }
+        print(AccountClient.get_modify_mobile_url(fdd_client, data))
+    except ClientException as e:
+        print(e.__str__())
+    except ServerException as e:
+        print(e.__str__())
+
+
 if __name__ == '__main__':
     fdd_client.set_token(token)
     #  如果是第三方应用就设置userToken
@@ -291,3 +305,4 @@ if __name__ == '__main__':
     get_union_ids_demo()
     purchase_demo()
     get_person_and_company_union_id_url_demo()
+    get_modify_mobile_url_demo()
